@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Oliver Wu",
+      "authorEmail": "oliver.wo@hotmail.com",
+      "authorUrl": "https://github.com/spywo"
+    }
+  }
+}
