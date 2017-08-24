@@ -4,33 +4,40 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-  prompting() {
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the dazzling ' + chalk.red('generator-walle-node') + ' generator!'
-    ));
+	constructor(args, opts) {
+		super(args, opts);
 
-    const prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+		this.npmOptions = {
+			// Skip prompts
+			'skip-name': false,
+			'skip-description': false,
+			'skip-version': false,
+			'skip-main': true,
+			'skip-test': true,
+			'skip-repo': false,
+			'skip-keywords': false,
+			'skip-author': false,
+			'skip-license': false,
 
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
-  }
+			version: '0.0.0',
+			description: '',
+			test: 'echo "Error: no test specified" && exit 1',
+			keywords: [],
+			author: '',
+			license: 'ISC'
+		};
+	}
 
-  writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
-  }
+	initializing() {
+		this.composeWith(require.resolve('generator-git-init'));
+		this.composeWith(require.resolve('generator-git-remote'));
+		this.composeWith(require.resolve('generator-npm-init'), this.npmOptions);
+	}
 
-  install() {
-    this.installDependencies();
-  }
+	prompting() {
+		// Have Yeoman greet the user.
+		this.log(yosay(
+			'Welcome to the dazzling ' + chalk.bgGreen('generator-walle-node') + ' generator!'
+		));
+	}
 };
