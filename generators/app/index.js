@@ -4,34 +4,10 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-  constructor(args, opts) {
-    super(args, opts);
-
-    this.npmOptions = {
-      // Skip prompts
-      'skip-name': false,
-      'skip-description': false,
-      'skip-version': false,
-      'skip-main': true,
-      'skip-test': false,
-      'skip-repo': false,
-      'skip-keywords': false,
-      'skip-author': false,
-      'skip-license': false,
-
-      version: '0.0.0',
-      description: '',
-      test: 'echo "Error: no test specified" && exit 1',
-      keywords: [],
-      author: '',
-      license: 'ISC'
-    };
-  }
-
   initializing() {
     this.composeWith(require.resolve('generator-git-init'));
-    this.composeWith(require.resolve('generator-git-remote'));
-    this.composeWith(require.resolve('generator-npm-init'), this.npmOptions);
+    this.composeWith(require.resolve('../git-remote'));
+    this.composeWith(require.resolve('../npm-init'), {pkgConfig: {version: '0.0.1'}});
   }
 
   prompting() {
@@ -39,5 +15,10 @@ module.exports = class extends Generator {
     this.log(yosay(
       'Welcome to the dazzling ' + chalk.bgGreen('generator-walle-node') + ' generator!'
     ));
+  }
+
+  configuring() {
+    this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(this.templatePath('.gitattributes'), this.destinationPath('.gitattributes'));
   }
 };
