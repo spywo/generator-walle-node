@@ -4,33 +4,21 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
+  initializing() {
+    this.composeWith(require.resolve('generator-git-init'));
+    this.composeWith(require.resolve('../git-remote'));
+    this.composeWith(require.resolve('../npm-init'), {pkgConfig: {version: '0.0.1'}});
+  }
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the dazzling ' + chalk.red('generator-walle-node') + ' generator!'
+      'Welcome to the dazzling ' + chalk.bgGreen('generator-walle-node') + ' generator!'
     ));
-
-    const prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
-
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    });
   }
 
-  writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
-  }
-
-  install() {
-    this.installDependencies();
+  configuring() {
+    this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(this.templatePath('.gitattributes'), this.destinationPath('.gitattributes'));
   }
 };

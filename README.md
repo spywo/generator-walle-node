@@ -1,5 +1,5 @@
 # generator-walle-node [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> It generates the node application with basic files.
+> It generates the node application with basic files from scratch.
 
 ## Installation
 
