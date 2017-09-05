@@ -28,3 +28,5 @@ docs
 
 # istanbul nyc
 .nyc_output
+
+target

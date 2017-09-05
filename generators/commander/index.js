@@ -10,7 +10,6 @@ module.exports = class extends Generator {
 
   configuring() {
     this.fs.copy(this.templatePath('scripts'), this.destinationPath('scripts'));
-    this.fs.copy(this.templatePath('config'), this.destinationPath('config'));
   }
 
   writing() {
@@ -41,10 +40,6 @@ module.exports = class extends Generator {
   install() {
     this.npmInstall(['log4js'], { 'save-dev': true });
     this.npmInstall(['fs-extra, lodash'], { 'save-dev': true });
-
-    this.npmInstall(['webpack', 'webpack-dev-server', 'webpack-merge'], { 'save-dev': true });
-    this.npmInstall(['url-loader', 'style-loader', 'sass-loader', 'file-loader', 'css-loader'], { 'save-dev': true });
-    this.npmInstall(['babel', 'babel-loader', 'babel-register', 'babel-polyfill', 'babel-preset-es2015', 'babel-plugin-istanbul', 'babel-plugin-syntax-dynamic-import', 'babel-plugin-transform-async-to-generator'], { 'save-dev': true });
   }
 
   end() {

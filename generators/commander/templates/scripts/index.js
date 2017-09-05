@@ -1,4 +1,5 @@
 'use strict';
+
 const cp = require('child_process');
 const path = require('path');
 const logger = require('./utils/logger.js').getLogger('Commander');

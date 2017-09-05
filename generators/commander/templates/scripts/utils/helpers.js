@@ -36,6 +36,6 @@ module.exports.CommonHelper = class {
 
     const filePath = path.resolve(cfg.outputPath, in_filename);
     fs.writeFileSync(filePath, in_data);
-    logger.info(`Successfully write to ${filePath}`);
+    logger.info(`Successfully written to ${filePath}`);
   }
 };
