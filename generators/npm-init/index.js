@@ -24,7 +24,15 @@ module.exports = class extends Generator {
       }
     };
 
-    const cfg = _.extend({}, this.options.pkgConfig);
+    let cfg = {}; //
+    const pkgConfigOption = this.options.pkgConfig;
+    if (pkgConfigOption) {
+      if (typeof pkgConfigOption === 'string') {
+        cfg = _.extend(cfg, JSON.parse(pkgConfigOption));
+      } else {
+        cfg = _.extend(cfg, pkgConfigOption);
+      }
+    }
 
     const pkg = this.fs.readJSON('package.json');
 
@@ -107,7 +115,8 @@ module.exports = class extends Generator {
     prompts.push({
       name: 'author.url',
       message: 'author\'s url:',
-      default: this.props.author.url
+      default: this.props.author.url,
+      store: true
     });
 
     this.prompt(prompts).then(props => {

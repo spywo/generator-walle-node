@@ -5,7 +5,7 @@ const path = require('path');
 const logger = require('./utils/logger.js').getLogger('Commander');
 
 if (process.argv.length < 3) {
-    logger.fatal(`Invalid commander! \n Usage: node scripts cmd [args ...] <optional args ...> <value ...>`);
+    logger.fatal(`Invalid commander! \n Usage: node scripts <command> [<options>] [--] [<args>] `);
     process.exit(1);
 }
 

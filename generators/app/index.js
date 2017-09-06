@@ -16,6 +16,7 @@ module.exports = class extends Generator {
     if (fs.pathExistsSync(this.destinationPath('.git'))) {
       return Promise.resolve();
     }
+
     return this.prompt([{
       type: 'confirm',
       name: 'git',
