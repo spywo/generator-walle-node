@@ -8,7 +8,7 @@ const executor = require('./executor.js');
 
 program
   .version(cfg.commander.version)
-  .option('-t --target [target]', 'target envrionment - dev|prod', /^(dev|prod)$/i, 'dev')
+  .option('-t --target <target>', 'target envrionment - dev|prod', /^(dev|prod)$/i, 'dev')
   .parse(process.argv);
 
 if (program.target) {

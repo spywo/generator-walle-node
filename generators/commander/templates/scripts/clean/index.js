@@ -8,7 +8,7 @@ const executor = require('./executor.js');
 
 program
   .version(cfg.commander.version)
-  .usage('<file ...>')
+  .usage('[file ...]')
   .parse(process.argv);
 
 executor(program.args);
