@@ -7,16 +7,17 @@ const _ = require('lodash');
 describe('Initiate the project by default', () => {
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .inTmpDir(function (dir) {
+      .inTmpDir(function(dir) {
         console.log(dir);
       })
-      .withOptions({skipInstall: true})
-      .withPrompts({license: 'ISC'});
+      .withOptions({ skipInstall: true })
+      .withPrompts({ license: 'ISC' });
   });
 
   it('should generate files', () => {
     assert.file([
       'package.json',
+      '.gitattributes',
       '.gitignore',
       'LICENSE',
       'index.js'
@@ -41,6 +42,25 @@ describe('Initiate the project by default', () => {
           license: 'ISC'
         }
       ));
+  });
+});
+
+describe('Initiate the project by default without git', () => {
+  beforeAll(() => {
+    return helpers.run(path.join(__dirname, '../generators/app'))
+      .inTmpDir(function(dir) {
+        console.log(dir);
+      })
+      .withOptions({ skipInstall: true })
+      .withPrompts({ git: false, license: 'MIT' });
+  });
+
+  it('should have no `.git` folder and other git related files', () => {
+    assert.noFile(['.git', '.gitattributes', '.gitignore']);
+  });
+
+  it('should have no `repository` in package.json', () => {
+    assert.noJsonFileContent('package.json', { repository: {} });
   });
 });
 
@@ -70,16 +90,17 @@ describe('Initiate the project by customized attributes', () => {
 
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .inTmpDir(function (dir) {
+      .inTmpDir(function(dir) {
         console.log(dir);
       })
-      .withOptions({skipInstall: true})
+      .withOptions({ skipInstall: true })
       .withPrompts(prompts);
   });
 
   it('should generate files', () => {
     assert.file([
       'package.json',
+      '.gitattributes',
       '.gitignore',
       'LICENSE',
       mainEntry
@@ -109,3 +130,4 @@ describe('Initiate the project by customized attributes', () => {
       ));
   });
 });
+
