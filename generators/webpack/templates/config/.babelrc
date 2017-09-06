@@ -1,0 +1,17 @@
+{
+  "presets": [
+    "es2015"
+  ],
+  "plugins": [
+    "syntax-dynamic-import",
+    "transform-async-to-generator"
+  ],
+  "comments": false,
+  "env": {
+    "test": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
+}
