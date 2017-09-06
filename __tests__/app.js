@@ -17,6 +17,7 @@ describe('Initiate the project by default', () => {
   it('should generate files', () => {
     assert.file([
       'package.json',
+      '.gitattributes',
       '.gitignore',
       'LICENSE',
       'index.js'
@@ -44,12 +45,31 @@ describe('Initiate the project by default', () => {
   });
 });
 
+describe('Initiate the project by default without git', () => {
+  beforeAll(() => {
+    return helpers.run(path.join(__dirname, '../generators/app'))
+      .inTmpDir(function (dir) {
+        console.log(dir);
+      })
+      .withOptions({skipInstall: true})
+      .withPrompts({git: false, license: 'MIT'});
+  });
+
+  it('should have no `.git` folder and other git related files', () => {
+    assert.noFile(['.git', '.gitattributes', '.gitignore']);
+  });
+
+  it('should have no `repository` in package.json', () => {
+    assert.noJsonFileContent('package.json', {repository: {}});
+  });
+});
+
 describe('Initiate the project by customized attributes', () => {
   const mainEntry = 'server123.js';
   const author = {
     name: 'Oliver',
     email: 'oliver@hhh.com',
-    website: 'https://oliver.com'
+    url: 'https://oliver.com'
   };
   const test = 'jest';
   const remoteUrl = 'https://git.com';
@@ -62,7 +82,7 @@ describe('Initiate the project by customized attributes', () => {
     main: mainEntry,
     'author.name': author.name,
     'author.email': author.email,
-    'author.website': author.website,
+    'author.url': author.url,
     'scripts.test': test,
     keywords: ['walle', 'app'],
     license: 'MIT'
@@ -80,6 +100,7 @@ describe('Initiate the project by customized attributes', () => {
   it('should generate files', () => {
     assert.file([
       'package.json',
+      '.gitattributes',
       '.gitignore',
       'LICENSE',
       mainEntry
@@ -90,7 +111,7 @@ describe('Initiate the project by customized attributes', () => {
     delete prompts.remoteUrl;
     delete prompts['author.name'];
     delete prompts['author.email'];
-    delete prompts['author.website'];
+    delete prompts['author.url'];
     delete prompts['scripts.test'];
 
     assert.jsonFileContent('package.json',
@@ -109,3 +130,4 @@ describe('Initiate the project by customized attributes', () => {
       ));
   });
 });
+
