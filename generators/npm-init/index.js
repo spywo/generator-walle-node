@@ -24,14 +24,14 @@ module.exports = class extends Generator {
       }
     };
 
-    const options = _.extend({}, this.options.pkgConfig);
+    const cfg = _.extend({}, this.options.pkgConfig);
 
     const pkg = this.fs.readJSON('package.json');
 
     _.merge(
       this.props,
       defaults,
-      options,
+      cfg,
       pkg);
   }
 
@@ -105,9 +105,9 @@ module.exports = class extends Generator {
     });
 
     prompts.push({
-      name: 'author.website',
-      message: 'author\'s website:',
-      default: this.props.author.website
+      name: 'author.url',
+      message: 'author\'s url:',
+      default: this.props.author.url
     });
 
     this.prompt(prompts).then(props => {
@@ -130,7 +130,7 @@ module.exports = class extends Generator {
     this.composeWith(require.resolve('generator-license/app'), {
       name: this.props.author.name,
       email: this.props.author.email,
-      website: this.props.author.website
+      website: this.props.author.url
     });
   }
 

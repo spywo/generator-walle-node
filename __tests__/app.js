@@ -7,11 +7,11 @@ const _ = require('lodash');
 describe('Initiate the project by default', () => {
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .inTmpDir(function(dir) {
+      .inTmpDir(function (dir) {
         console.log(dir);
       })
-      .withOptions({ skipInstall: true })
-      .withPrompts({ license: 'ISC' });
+      .withOptions({skipInstall: true})
+      .withPrompts({license: 'ISC'});
   });
 
   it('should generate files', () => {
@@ -48,11 +48,11 @@ describe('Initiate the project by default', () => {
 describe('Initiate the project by default without git', () => {
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .inTmpDir(function(dir) {
+      .inTmpDir(function (dir) {
         console.log(dir);
       })
-      .withOptions({ skipInstall: true })
-      .withPrompts({ git: false, license: 'MIT' });
+      .withOptions({skipInstall: true})
+      .withPrompts({git: false, license: 'MIT'});
   });
 
   it('should have no `.git` folder and other git related files', () => {
@@ -60,7 +60,7 @@ describe('Initiate the project by default without git', () => {
   });
 
   it('should have no `repository` in package.json', () => {
-    assert.noJsonFileContent('package.json', { repository: {} });
+    assert.noJsonFileContent('package.json', {repository: {}});
   });
 });
 
@@ -69,7 +69,7 @@ describe('Initiate the project by customized attributes', () => {
   const author = {
     name: 'Oliver',
     email: 'oliver@hhh.com',
-    website: 'https://oliver.com'
+    url: 'https://oliver.com'
   };
   const test = 'jest';
   const remoteUrl = 'https://git.com';
@@ -82,7 +82,7 @@ describe('Initiate the project by customized attributes', () => {
     main: mainEntry,
     'author.name': author.name,
     'author.email': author.email,
-    'author.website': author.website,
+    'author.url': author.url,
     'scripts.test': test,
     keywords: ['walle', 'app'],
     license: 'MIT'
@@ -90,10 +90,10 @@ describe('Initiate the project by customized attributes', () => {
 
   beforeAll(() => {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .inTmpDir(function(dir) {
+      .inTmpDir(function (dir) {
         console.log(dir);
       })
-      .withOptions({ skipInstall: true })
+      .withOptions({skipInstall: true})
       .withPrompts(prompts);
   });
 
@@ -111,7 +111,7 @@ describe('Initiate the project by customized attributes', () => {
     delete prompts.remoteUrl;
     delete prompts['author.name'];
     delete prompts['author.email'];
-    delete prompts['author.website'];
+    delete prompts['author.url'];
     delete prompts['scripts.test'];
 
     assert.jsonFileContent('package.json',

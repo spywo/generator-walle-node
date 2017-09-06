@@ -15,22 +15,21 @@ module.exports = class extends Generator {
   prompting() {
     if (fs.pathExistsSync(this.destinationPath('.git'))) {
       return Promise.resolve();
-    } else {
-      return this.prompt([{
-        type: 'confirm',
-        name: 'git',
-        message: 'Would you like to enable git?',
-        default: 'Y/n'
-      }]).then(answers => {
-        if (answers.git) {
-          this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
-          this.fs.copy(this.templatePath('.gitattributes'), this.destinationPath('.gitattributes'));
-
-          this.composeWith(require.resolve('generator-git-init'));
-          this.composeWith(require.resolve('../git-remote'));
-        }
-      });
     }
+    return this.prompt([{
+      type: 'confirm',
+      name: 'git',
+      message: 'Would you like to enable git?',
+      default: 'Y/n'
+    }]).then(answers => {
+      if (answers.git) {
+        this.fs.copy(this.templatePath('.gitignore'), this.destinationPath('.gitignore'));
+        this.fs.copy(this.templatePath('.gitattributes'), this.destinationPath('.gitattributes'));
+
+        this.composeWith(require.resolve('generator-git-init'));
+        this.composeWith(require.resolve('../git-remote'));
+      }
+    });
   }
 
   default() {
