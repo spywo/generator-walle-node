@@ -38,13 +38,12 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.npmInstall(['log4js'], { 'save-dev': true });
-    this.npmInstall(['fs-extra, lodash'], { 'save-dev': true });
+    this.npmInstall(['log4js'], {'save-dev': true});
+    this.npmInstall(['fs-extra, lodash'], {'save-dev': true});
   }
 
   end() {
     this.log(chalk.bgGreen(`Create commanders done!`));
   }
 };
-
 

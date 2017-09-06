@@ -28,11 +28,11 @@
     "yeoman-test": "^1.6.0"
   },
   "dependencies": {
-    "chalk": "^1.1.3",
+    "chalk": "^2.1.0",
     "generator-git-init": "^1.1.3",
     "generator-license": "^5.1.0",
-    "yeoman-generator": "^1.0.0",
-    "yosay": "^2.0.0"
+    "yeoman-generator": "^1.1.1",
+    "yosay": "^2.0.1"
   },
   "jest": {
     "testEnvironment": "node"
