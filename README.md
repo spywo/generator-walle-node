@@ -7,8 +7,8 @@ First, install [Yeoman](http://yeoman.io) and generator-walle-node using [npm](h
 
 ```bash
 npm install -g yo
-npm install -g generator-walle-node
 ```
+Change to `generator-walle-node` folder, then run `npm link`.
 
 Then generate your new project:
 

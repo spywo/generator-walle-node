@@ -1,0 +1,17 @@
+.git
+package-lock.json
+package.json
+.eslintignore
+.gitignore
+.prettierignore
+.prettierrc
+.gitignore
+*.fixtures.json
+build/**
+coverage/**
+.nyc_output/**
+.vs/**
+./vscode/**
+Document/**
+out/**
+*.bak
